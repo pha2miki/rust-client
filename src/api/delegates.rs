@@ -2,7 +2,7 @@ use http::client::Client;
 use std::borrow::Borrow;
 use std::collections::HashMap;
 
-use api::models::{Balances, Block, Delegate, Wallet};
+use api::models::{Block, Delegate, Wallet};
 use api::Result;
 
 pub struct Delegates {
@@ -61,28 +61,6 @@ impl Delegates {
     {
         let endpoint = format!("delegates/{}/voters", id);
         self.client.get_with_params(&endpoint, parameters)
-    }
-
-    /// Returns the voters of a delegate and their balances
-    ///
-    /// # Example
-    /// ```
-    /// # extern crate serde_json;
-    /// # extern crate arkecosystem_client;
-    ///
-    /// # use serde_json::to_string_pretty;
-    /// # use arkecosystem_client::connection::Connection;
-    ///
-    /// # fn main() {
-    ///   # let client = Connection::new("http://167.114.43.38:4003/api/");
-    ///   let delegate_id = "yo";
-    ///   let voters_balances = client.delegates.voters_balances(&delegate_id).unwrap();
-    ///   println!("{}", to_string_pretty(&voters_balances).unwrap());
-    /// # }
-    /// ```
-    pub fn voters_balances(&self, id: &str) -> Result<Balances> {
-        let endpoint = format!("delegates/{}/voters/balances", id);
-        self.client.get(&endpoint)
     }
 
     /// Searches the delegates
